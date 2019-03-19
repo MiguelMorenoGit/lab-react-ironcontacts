@@ -18,6 +18,8 @@ class App extends Component {
         pictureUrl={item.pictureUrl} 
         name={item.name} 
         popularity={item.popularity}
+        index={index}
+        removeActor={this.deleteActor}
       />
     })
   }
@@ -31,10 +33,32 @@ class App extends Component {
 
   sortByName = () => {
 
+    const sortArray = this.state.data.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
+
+    this.setState({
+      data: sortArray
+    })
+
   }
 
   sortByPopularity = () => {
+
+    const sortPopulateArray = this.state.data.sort((a,b) => (a.popularity > b.popularity) ? -1 : ((b.popularity > a.popularity) ? 1 : 0)); 
+
+    this.setState({
+      data: sortPopulateArray
+    })
     
+  }
+
+  deleteActor = (index) => {
+    const deleteActor = [...this.state.data];
+    console.log(deleteActor);
+    deleteActor.splice(index,1);
+
+    this.setState({
+      data: deleteActor
+    })
   }
 
   render() {
